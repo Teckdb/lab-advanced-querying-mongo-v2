@@ -14,14 +14,14 @@ Projection: {name: 1, _id: 0}
 **2. All the companies that have more than 5000 employees. Limit the search to 20 companies and sort them by *number of employees*.**
 
 Query: {number_of_employees: {$gt: 5000}}
-Sort: {number_of_employees: 1}
+Sort: {number_of_employees: -1}
 Limit: 20
 
 <br>
 
 **3. All the companies founded between 2000 and 2005, both years included. Retrieve only the `name` and `founded_year` fields.**
 
-Query: {founded_year: {$gte: 2000, $lte: 2007}}
+Query: {founded_year: {$gte: 2000, $lte: 2005}}
 Projection: {name: 1, _id: 0, founded_year: 1}
 
 <br>
@@ -78,7 +78,7 @@ Limit: 10
 
 **1. All the companies that have been acquired after 2010, order by the acquisition amount, and retrieve only their `name` and `acquisition` field.**
 
-Query: {"acquisition.acquired_day" :{$gt: 10 }}
+Query: {"acquisition.acquired_day" :{$gt: 2010 }}
 Project: {name:1, acquisition: 1, _id: 0}
 Sort: {"acquisition.price_amount": -1}
 
@@ -88,7 +88,7 @@ Sort: {"acquisition.price_amount": -1}
 
 Query: {founded_day: {$ne: 'null'}}
 Project: {name:1, founded_year:1, _id:0}
-Sort: {founded_year: -1}
+Sort: {founded_year: 1}
 
 <br>
 
@@ -107,5 +107,5 @@ Query: {$and:[{"acquisition.price_amount":{$gt:10000000}},{"acquisition.price_cu
 
 **5. All the companies that have been founded between 2000 and 2010, but have not been acquired before 2011.**
 
-Query: {$and:[{founded_year: {$gte:2000}},{founded_year:{$lte:2010}},{"acquisition.acquired_year":{$gt:2011}}]}
+Query: {$and:[{founded_year: {$gte:2000}},{founded_year:{$lte:2010}},{"acquisition.acquired_year":{$gt:2010}}]}
 <br>
